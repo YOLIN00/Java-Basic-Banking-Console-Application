@@ -234,6 +234,68 @@ public class AccountManagement {
             System.out.println();
         }
     }
-    
+
+    public void updateAccount(){
+        System.out.println("You can update only 1->Name, 2->Address, 3->Phone no");
+        Scanner input=new Scanner(System.in);
+        int operation=Integer.parseInt(input.nextLine());
+
+        while (operation<1 || operation >3) {
+            System.out.println("Invalid input. Type 1,2 or 3");
+            operation=Integer.parseInt(input.nextLine());
+        }
+
+        System.out.println("Type your account no:");
+        Account account=null;
+        String accountNo=input.nextLine();
+        while (!accountNo.matches("\\d+")){
+            System.out.println("Account no consist of only digits");
+            accountNo=input.nextLine();
+        }
+        Iterator<Account> iterator=AllAccounts.iterator();
+        while(iterator.hasNext()){
+            Account acc=iterator.next();
+            if(accountNo.equals(acc.getNo())){
+                account=acc;
+                break;
+            }
+        }
+        if(account==null){
+            System.out.println("Sorry! No account found!\n");
+        }else{
+            if(operation==1){
+                System.out.println("Type your new name(max 15 char): ");
+                String newName=input.nextLine();
+                while (newName.length()>15 || newName.length()==0){
+                    System.out.println("Name should be maximum 15 char length &  not empty");
+                    newName=input.nextLine();
+                }
+                String prevName=account.getName();
+                account.setName(newName);
+                System.out.println("Your name "+prevName+" to "+newName+"\n");
+            }else if(operation==2){
+                System.out.println("Type your new address(max 20 char): ");
+                String newAddress=input.nextLine();
+                while (newAddress.length()>20 || newAddress.length()==0){
+                    System.out.println("Address should be maximum 15 char length &  not empty");
+                    newAddress=input.nextLine();
+                }
+                String prevAddress=account.getAddress();
+                account.setAddress(newAddress);
+                System.out.println("Your name "+prevAddress+" to "+newAddress+"\n");
+            }else if (operation==3){
+                System.out.println("Type your new phone no(11 digit): ");
+                String newPhone=input.nextLine();
+                while (newPhone.length()!=11 || !newPhone.matches("\\d+")){
+                    System.out.println("Phone should be 11 char length & only numerical digit");
+                    newPhone=input.nextLine();
+                }
+                String prevPhone=account.getPhone();
+                account.setPhone(newPhone);
+                System.out.println("Your name "+prevPhone+" to "+newPhone+"\n");
+            }
+        }
+
+    }
 
 }

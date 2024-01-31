@@ -32,6 +32,9 @@ public class Main {
                     break;
                 }
                 case 3:{
+                    management.updateAccount();
+                    print();
+                    opeartionType=Integer.parseInt(input.nextLine());
                     break;
                 }
                 case 4:{

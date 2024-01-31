@@ -57,10 +57,6 @@ public class Account {
         return branch;
     }
 
-    public void setBranch(BankBranch branch) {
-        this.branch = branch;
-    }
-
     public BigInteger getBalance() {
         return balance;
     }
