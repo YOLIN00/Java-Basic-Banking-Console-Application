@@ -203,4 +203,37 @@ public class AccountManagement {
         }
     }
 
+    public void searchAccount(){
+        System.out.println("Type your account no:");
+        Scanner input=new Scanner(System.in);
+        Account account=null;
+        String accountNo=input.nextLine();
+        while (!accountNo.matches("\\d+")){
+            System.out.println("Account no consist of only digits");
+            accountNo=input.nextLine();
+        }
+        Iterator<Account> iterator=AllAccounts.iterator();
+        while(iterator.hasNext()){
+            Account acc=iterator.next();
+            if(accountNo.equals(acc.getNo())){
+                account=acc;
+                break;
+            }
+        }
+        if(account==null){
+            System.out.println("Sorry! No account found!\n");
+        }else{
+            System.out.println("Account no : "+account.getNo());
+            System.out.println("Account name : "+account.getName());
+            System.out.println("Account branch : "+account.getBranch());
+            System.out.println("Account type : "+account.getType());
+            System.out.println("Account balance : "+account.getBalance().toString());
+            System.out.println("Account phone : "+account.getPhone());
+            System.out.println("Account address : "+account.getAddress());
+            System.out.println("Account createdAt : "+account.getCreatedAt());
+            System.out.println();
+        }
+    }
+    
+
 }
