@@ -35,6 +35,9 @@ public class Main {
                     break;
                 }
                 case 4:{
+                    management.deleteAccount();
+                    print();
+                    opeartionType=Integer.parseInt(input.nextLine());
                     break;
                 }
                 case 5:{

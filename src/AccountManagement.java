@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class AccountManagement {
@@ -82,12 +83,18 @@ public class AccountManagement {
 
     }
     public void displayAllAccount(){
-        System.out.printf("%11s %15s %15s", "NO", "NAME", "BRANCH");
-        System.out.println();
-        for(Account account : AllAccounts){
-            System.out.printf("%11s %15s %15s", account.getNo(), account.getName(), account.getBranch());
+        if(AllAccounts.size()==0){
+            System.out.println("No account in the list.\n");
+        }else {
+            System.out.printf("%11s %15s %15s", "NO", "NAME", "BRANCH");
+            System.out.println();
+            for(Account account : AllAccounts){
+                System.out.printf("%11s %15s %15s", account.getNo(), account.getName(), account.getBranch());
+                System.out.println();
+            }
+            System.out.println();
         }
-        System.out.println();
+
     }
 
     public void deposit(){
@@ -167,6 +174,32 @@ public class AccountManagement {
                 System.out.println("Your withdraw amount : "+amount+". Your current balance is "+curBalance+"$\n");
             }
 
+        }
+    }
+
+    public void deleteAccount(){
+        System.out.println("Type your account no:");
+        Scanner input=new Scanner(System.in);
+        Account account=null;
+        String accountNo=input.nextLine();
+        while (!accountNo.matches("\\d+")){
+            System.out.println("Account no consist of only digits");
+            accountNo=input.nextLine();
+        }
+        Iterator<Account> iterator=AllAccounts.iterator();
+        while(iterator.hasNext()){
+            Account acc=iterator.next();
+            if(accountNo.equals(acc.getNo())){
+                account=acc;
+                iterator.remove();
+                break;
+            }
+        }
+        if(account==null){
+            System.out.println("Sorry! No account found!\n");
+        }else{
+            String balance=account.getBalance().toString();
+            System.out.println("Your account no: "+account.getNo()+" has been deleted & "+account.getBalance()+"$ withdrawn.\n");
         }
     }
 
