@@ -44,6 +44,9 @@ public class Main {
                     break;
                 }
                 case 6:{
+                    management.withdraw();
+                    print();
+                    opeartionType=Integer.parseInt(input.nextLine());
                     break;
                 }
                 case 7:{

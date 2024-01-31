@@ -65,8 +65,17 @@ public class Account {
         return balance;
     }
 
+    public int getMinBalance(){
+        return type.getMinimumBalance();
+    }
+
     public String deposit(String amount){
-       return balance.add(new BigInteger(amount)).toString();
+        balance=balance.add(new BigInteger(amount));
+       return balance.toString();
+    }
+    public String withdraw(String amount){
+        balance=balance.subtract(new BigInteger(amount));
+        return balance.toString();
     }
 
     public String getPhone() {

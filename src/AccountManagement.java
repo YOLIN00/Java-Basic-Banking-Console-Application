@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -117,6 +118,55 @@ public class AccountManagement {
 
             String curBalance=account.deposit(amount);
             System.out.println("Your deposited amount : "+amount+". Your current balance is "+curBalance+"$\n");
+        }
+    }
+
+    public void withdraw(){
+        System.out.println("Type your account no:");
+        Scanner input=new Scanner(System.in);
+        Account account=null;
+        String accountNo=input.nextLine();
+        while (!accountNo.matches("\\d+")){
+            System.out.println("Account no consist of only digits");
+            accountNo=input.nextLine();
+        }
+
+        for(Account acc:AllAccounts){
+            if(accountNo.equals(acc.getNo())){
+                account=acc;
+            }
+        }
+        if(account==null){
+            System.out.println("Sorry! No account found!\n");
+        }else{
+            System.out.println("Type withdraw amount: ");
+            String amount=input.nextLine();
+
+            while (!amount.matches("\\d+")){
+                System.out.println("Withdraw amount consist of only digits");
+                amount=input.nextLine();
+            }
+
+            int minBalance= account.getMinBalance();
+            BigInteger curBalance=account.getBalance();
+//            System.out.println("Cur balance: "+curBalance.toString());
+
+            curBalance=curBalance.subtract(new BigInteger(amount));
+//            System.out.println("Cur balance: "+curBalance.toString());
+
+            int result=curBalance.compareTo(BigInteger.valueOf(minBalance));
+            curBalance=curBalance.add(new BigInteger(amount));
+
+//            System.out.println("MInBal: "+minBalance+" cur "+curBalance.toString()+" result "+result);
+
+            if(result<0){
+                curBalance=curBalance.subtract(BigInteger.valueOf(minBalance));
+                System.out.println("Sorry!! Your should always keep minimum balance "+minBalance+"$ in your account.You can withdraw maximum "+curBalance.toString()+"$\n");
+            }else{
+                curBalance=new BigInteger(account.withdraw(amount));
+                System.out.println("Your withdraw amount : "+amount+". Your current balance is "+curBalance+"$\n");
+            }
+
         }
     }
 
