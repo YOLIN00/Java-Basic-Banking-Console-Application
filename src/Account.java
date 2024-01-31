@@ -65,6 +65,10 @@ public class Account {
         return balance;
     }
 
+    public String deposit(String amount){
+       return balance.add(new BigInteger(amount)).toString();
+    }
+
     public String getPhone() {
         return phone;
     }

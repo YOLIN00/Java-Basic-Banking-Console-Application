@@ -42,7 +42,7 @@ public class AccountManagement {
 
         System.out.println("You have to deposit minimum "+Type.getMinimumBalance()+"$ to create account type: "+Type+". Input 1->Continue, 0->Not Now");
         int confirmation=Integer.parseInt(input.nextLine());
-        System.out.println("Confirmation : "+confirmation);
+//        System.out.println("Confirmation : "+confirmation);
         while (confirmation!=0 && confirmation!=1){
             System.out.println("Input 0 or 1\n");
             confirmation=Integer.parseInt(input.nextLine());
@@ -64,18 +64,20 @@ public class AccountManagement {
 
             System.out.println("Your phone no(11 digit): ");
             String phone=input.nextLine();
-            while (phone.length()!=11 && phone.matches("\\d+")){
-                System.out.println("Phone should be 11 char length");
+//            System.out.println("Phone: "+phone +" "+phone.matches("\\d+"));
+            while (phone.length()!=11 || !phone.matches("\\d+")){
+                System.out.println("Phone should be 11 char length & only numerical digit");
                 phone=input.nextLine();
             }
             Account newAccount=new Account(name,Branch,Type,address,phone);
             AllAccounts.add(newAccount);
-            System.out.println("Your account created successfullu. Your Account no : "+newAccount.getNo()+"\n");
+            System.out.println("Your account created successfully. Your Account no : "+newAccount.getNo()+"\n");
 
         }else if (confirmation==0){
             System.out.println("No account created!\n");
 
         }
+//        input.close();
 
     }
     public void displayAllAccount(){
@@ -85,6 +87,37 @@ public class AccountManagement {
             System.out.printf("%11s %15s %15s", account.getNo(), account.getName(), account.getBranch());
         }
         System.out.println();
+    }
+
+    public void deposit(){
+        System.out.println("Type your account no:");
+        Scanner input=new Scanner(System.in);
+        Account account=null;
+        String accountNo=input.nextLine();
+        while (!accountNo.matches("\\d+")){
+            System.out.println("Account no consist of only digits");
+            accountNo=input.nextLine();
+        }
+
+        for(Account acc:AllAccounts){
+            if(accountNo.equals(acc.getNo())){
+                account=acc;
+            }
+        }
+        if(account==null){
+            System.out.println("Sorry! No account found!\n");
+        }else{
+            System.out.println("Type deposited amount: ");
+            String amount=input.nextLine();
+
+            while (!amount.matches("\\d+")){
+                System.out.println("Deposit amount consist of only digits");
+                amount=input.nextLine();
+            }
+
+            String curBalance=account.deposit(amount);
+            System.out.println("Your deposited amount : "+amount+". Your current balance is "+curBalance+"$\n");
+        }
     }
 
 }
