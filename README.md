@@ -1,9 +1,8 @@
 1.Clone the git repo
-`git clone `
-
+`git clone https://github.com/YOLIN00/Java-Basic-Banking-Console-Application.git`
 2. Check if you have java installed or not
-3. java --version
-4. opem terminal in the src directory of the project & run below command
-5. javac Account.java AccountManagement.java AccountType.java BankBranch.java Main.java
-6. Then run
-7. java Main
+`java --version`
+3. opem terminal in the src directory of the project & run below command
+`javac Account.java AccountManagement.java AccountType.java BankBranch.java Main.java`
+4. Then run
+`java Main`
